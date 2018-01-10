@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/NameOfTheBook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        tool:text="The Life of the Mind" />
+
+    <TextView
+        android:id="@+id/NameOfTheAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/NameOfTheBook"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:textAllCaps="false"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@color/Author_name"
+        tool:text="Hannah Arendt" />
+
+    <TextView
+        android:id="@+id/Price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="10dp"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textColor="@color/Author_name"
+        tool:text="10$" />
+</RelativeLayout>
