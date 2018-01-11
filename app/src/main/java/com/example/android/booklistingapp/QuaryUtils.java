@@ -2,6 +2,10 @@ package com.example.android.booklistingapp;
 
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 /**
  * Created by mostafa on 1/6/18.
@@ -20,7 +25,37 @@ public class QuaryUtils {
 
 
     //TODO انت لازم هنا تروح تعمل الكلاس الى فيها متغيرات الزاكره بتاعت الكتاب الى هبتعرض على الالل لست
+    private static ArrayList<BookData> getResponse(String jsonRsponse) {
+        ArrayList<BookData> arrayList = new ArrayList<>();
+        String priceMessage;
+        try {
+            JSONObject jsonObject = new JSONObject(jsonRsponse);
+            JSONArray itemsArray = jsonObject.getJSONArray("items");
+            for (int i = 0; i < itemsArray.length(); i++) {
+                JSONObject itemsObject = itemsArray.getJSONObject(i);
+                JSONObject volumeInfoObject = itemsObject.getJSONObject("volumeInfo");
+                String title = volumeInfoObject.getString("title");
+                //I must work here to make it write all authors names.
+                String author = volumeInfoObject.getJSONArray("authors").getString(0);
+                JSONObject saleInfoObject = itemsObject.getJSONObject("saleInfo");
+                String saleability = saleInfoObject.getString("saleability");
+                if (saleability == "FOR_SALE") {
+                    JSONObject listPriceObject = saleInfoObject.getJSONObject("listPrice");
+                    String price = listPriceObject.getString("amount");
+                    String currencyCode = listPriceObject.getString("currencyCode");
+                    priceMessage = price + " " + currencyCode;
+                } else {
+                    priceMessage = "Not_For_Sale";
+                }
+                arrayList.add(new BookData(title, author, priceMessage));
 
+            }
+
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error with getResponse method. : " + e.getMessage());
+        }
+        return arrayList;
+    }
 
     private static URL CreateUrl(String murl) {
         URL url = null;
