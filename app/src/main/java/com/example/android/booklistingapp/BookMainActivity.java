@@ -11,7 +11,7 @@ import android.widget.EditText;
 public class BookMainActivity extends AppCompatActivity {
     private final static String LOG_TAG = BookMainActivity.class.getName();
     protected EditText editText;
-    protected Button BuSearch;
+    protected Button BuSearch, Bu2Search;
     private String GoogleApiURL = "https://www.googleapis.com/books/v1/volumes?q=";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class BookMainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String userSelectedName = editText.getText().toString();
                 Log.e(LOG_TAG, "search for : " + finishTheUrl(userSelectedName));
+                OpenListOfBookIntent.putExtra("url", finishTheUrl(userSelectedName));
                 startActivity(OpenListOfBookIntent);
 
             }

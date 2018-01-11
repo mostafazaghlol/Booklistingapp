@@ -23,11 +23,21 @@ import java.util.ArrayList;
 public class QuaryUtils {
     private final static String LOG_TAG = QuaryUtils.class.getName();
 
+    public static ArrayList<BookData> fetchData(String Url) throws IOException {
+        URL url = CreateUrl(Url);
+        String jsonResponse = "";
+        try {
+            jsonResponse = makeHttpRequest(url);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error with fetchData method : " + e.getMessage());
+        }
+        return getResponse(jsonResponse);
+    }
 
-    //TODO انت لازم هنا تروح تعمل الكلاس الى فيها متغيرات الزاكره بتاعت الكتاب الى هبتعرض على الالل لست
+
     private static ArrayList<BookData> getResponse(String jsonRsponse) {
         ArrayList<BookData> arrayList = new ArrayList<>();
-        String priceMessage;
+        String priceMessage, author;
         try {
             JSONObject jsonObject = new JSONObject(jsonRsponse);
             JSONArray itemsArray = jsonObject.getJSONArray("items");
@@ -36,10 +46,14 @@ public class QuaryUtils {
                 JSONObject volumeInfoObject = itemsObject.getJSONObject("volumeInfo");
                 String title = volumeInfoObject.getString("title");
                 //I must work here to make it write all authors names.
-                String author = volumeInfoObject.getJSONArray("authors").getString(0);
+                if (volumeInfoObject.has("authors")) {
+                    author = volumeInfoObject.getJSONArray("authors").getString(0);
+                } else {
+                    author = "";
+                }
                 JSONObject saleInfoObject = itemsObject.getJSONObject("saleInfo");
-                String saleability = saleInfoObject.getString("saleability");
-                if (saleability == "FOR_SALE") {
+
+                if (saleInfoObject.has("listPrice")) {
                     JSONObject listPriceObject = saleInfoObject.getJSONObject("listPrice");
                     String price = listPriceObject.getString("amount");
                     String currencyCode = listPriceObject.getString("currencyCode");
@@ -48,9 +62,7 @@ public class QuaryUtils {
                     priceMessage = "Not_For_Sale";
                 }
                 arrayList.add(new BookData(title, author, priceMessage));
-
             }
-
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error with getResponse method. : " + e.getMessage());
         }
