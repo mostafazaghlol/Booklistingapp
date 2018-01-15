@@ -59,7 +59,7 @@ public class QuaryUtils {
                     String currencyCode = listPriceObject.getString("currencyCode");
                     priceMessage = price + " " + currencyCode;
                 } else {
-                    priceMessage = "Not_For_Sale";
+                    priceMessage = "not availabe ";
                 }
                 arrayList.add(new BookData(title, author, priceMessage));
             }

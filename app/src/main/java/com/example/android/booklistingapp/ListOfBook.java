@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class ListOfBook extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_book);
         Intent i = getIntent();
         String url = i.getStringExtra("url");
-        Toast.makeText(this, "" + url, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "" + url, Toast.LENGTH_SHORT).show();
         customListAdapter = new CustomListAdapter(this, new ArrayList<BookData>());
         ListOfBookAsyncTask listOfBookAsyncTask = new ListOfBookAsyncTask();
         listOfBookAsyncTask.execute(url);

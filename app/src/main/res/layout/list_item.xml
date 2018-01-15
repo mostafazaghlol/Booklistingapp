@@ -12,7 +12,7 @@
         android:paddingTop="10dp"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="@android:color/black"
-        android:textStyle="bold"
+        android:textStyle="italic"
         tool:text="The Life of the Mind" />
 
     <TextView
@@ -31,10 +31,11 @@
         android:id="@+id/Price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:gravity="right"
         android:paddingRight="10dp"
-        android:textAppearance="?android:textAppearanceLarge"
+        android:textAppearance="?android:textAppearanceSmall"
         android:textColor="@color/Author_name"
         tool:text="10$" />
 </RelativeLayout>

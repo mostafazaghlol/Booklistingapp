@@ -7,11 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class BookMainActivity extends AppCompatActivity {
     private final static String LOG_TAG = BookMainActivity.class.getName();
     protected EditText editText;
-    protected Button BuSearch, Bu2Search;
+    protected Button BuSearch;
     private String GoogleApiURL = "https://www.googleapis.com/books/v1/volumes?q=";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,13 @@ public class BookMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String userSelectedName = editText.getText().toString();
-                Log.e(LOG_TAG, "search for : " + finishTheUrl(userSelectedName));
-                OpenListOfBookIntent.putExtra("url", finishTheUrl(userSelectedName));
-                startActivity(OpenListOfBookIntent);
-
+                if (userSelectedName.isEmpty()) {
+                    Toast.makeText(BookMainActivity.this, "Enter the name please !", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.e(LOG_TAG, "search for : " + finishTheUrl(userSelectedName));
+                    OpenListOfBookIntent.putExtra("url", finishTheUrl(userSelectedName));
+                    startActivity(OpenListOfBookIntent);
+                }
             }
         });
 
@@ -46,6 +50,8 @@ public class BookMainActivity extends AppCompatActivity {
         StringBuilder url = new StringBuilder(GoogleApiURL);
         if (searchedWord.length() != 0) {
             url.append(searchedWord);
+            url.append("&maxResults=40");
+            url.append("&orderBy=newest");
             return url.toString();
         }
         return null;
