@@ -5,23 +5,35 @@ package com.example.android.booklistingapp;
  */
 
 public class BookData {
-    private String mBookName, mAuthorName, mPrice;
+    private String mBookName, mAuthorName, mPrice, mUrl;
+
+    public BookData(String mBookName, String mAuthorName, String mPrice, String mUrl) {
+        this.mBookName = mBookName;
+        this.mAuthorName = mAuthorName;
+        this.mPrice = mPrice;
+        this.mUrl = mUrl;
+    }
 
     public BookData(String mBookName, String mAuthorName, String mPrice) {
         this.mBookName = mBookName;
         this.mAuthorName = mAuthorName;
         this.mPrice = mPrice;
+
     }
 
     public String getmAuthorName() {
-        return mAuthorName;
+        return this.mAuthorName;
     }
 
     public String getmBookName() {
-        return mBookName;
+        return this.mBookName;
     }
 
     public String getmPrice() {
-        return mPrice;
+        return this.mPrice;
+    }
+
+    public String getmUrl() {
+        return this.mUrl;
     }
 }
