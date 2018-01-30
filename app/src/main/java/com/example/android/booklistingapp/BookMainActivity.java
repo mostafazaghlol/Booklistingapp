@@ -37,6 +37,7 @@ public class BookMainActivity extends AppCompatActivity {
                 } else {
                     Log.e(LOG_TAG, "search for : " + finishTheUrl(userSelectedName));
                     OpenListOfBookIntent.putExtra("url", finishTheUrl(userSelectedName));
+                    OpenListOfBookIntent.putExtra("search item", userSelectedName);
                     startActivity(OpenListOfBookIntent);
                 }
             }

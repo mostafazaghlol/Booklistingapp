@@ -5,7 +5,15 @@ package com.example.android.booklistingapp;
  */
 
 public class BookData {
-    private String mBookName, mAuthorName, mPrice, mUrl;
+    private String mBookName, mAuthorName, mPrice, mUrl, mGoogleLink;
+
+    public BookData(String mBookName, String mAuthorName, String mPrice, String mUrl, String mGoogleLink) {
+        this.mBookName = mBookName;
+        this.mAuthorName = mAuthorName;
+        this.mPrice = mPrice;
+        this.mUrl = mUrl;
+        this.mGoogleLink = mGoogleLink;
+    }
 
     public BookData(String mBookName, String mAuthorName, String mPrice, String mUrl) {
         this.mBookName = mBookName;
@@ -19,6 +27,10 @@ public class BookData {
         this.mAuthorName = mAuthorName;
         this.mPrice = mPrice;
 
+    }
+
+    public String getmGoogleLink() {
+        return mGoogleLink;
     }
 
     public String getmAuthorName() {

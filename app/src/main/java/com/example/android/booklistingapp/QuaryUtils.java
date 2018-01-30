@@ -37,7 +37,7 @@ public class QuaryUtils {
 
     private static ArrayList<BookData> getResponse(String jsonRsponse) {
         ArrayList<BookData> arrayList = new ArrayList<>();
-        String priceMessage, author, url;
+        String priceMessage, author, url, googleLink;
         try {
             JSONObject jsonObject = new JSONObject(jsonRsponse);
             JSONArray itemsArray = jsonObject.getJSONArray("items");
@@ -67,7 +67,12 @@ public class QuaryUtils {
                 } else {
                     priceMessage = "not availabe ";
                 }
-                arrayList.add(new BookData(title, author, priceMessage, url));
+                if (saleInfoObject.has("buyLink")) {
+                    googleLink = saleInfoObject.getString("buyLink");
+                } else {
+                    googleLink = null;
+                }
+                arrayList.add(new BookData(title, author, priceMessage, url, googleLink));
             }
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error with getResponse method. : " + e.getMessage());
